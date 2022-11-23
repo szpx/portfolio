@@ -10,6 +10,7 @@
                     >
                 </li>
             </ul>
+
             <div class="burger" @click="navSlide">
                 <div class="line1"></div>
                 <div class="line2"></div>
@@ -34,23 +35,34 @@ export default {
         navSlide() {
             const burger = document.querySelector('.burger');
             const nav = document.querySelector('.nav-links');
-            const navLinks = document.querySelectorAll('.nav-links a');
 
             this.show = !this.show;
-
             nav.classList.toggle('nav-active');
-
-            navLinks.forEach((link, index) => {
-                if (link.style.animation) {
-                    link.style.animation = '';
-                } else {
-                    link.style.animation = `navlinkfade-in 0.5s ease forwards ${
-                        index / 7 + 0.5
-                    }s `;
-                }
-            });
             burger.classList.toggle('toggle');
         },
+    },
+    created() {
+        var self = this;
+        document.addEventListener('click', (e) => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const line1 = document.querySelector('.line1');
+            const line2 = document.querySelector('.line2');
+            const line3 = document.querySelector('.line3');
+            if (
+                e.target == nav ||
+                e.target == burger ||
+                e.target == line1 ||
+                e.target == line2 ||
+                e.target == line3
+            ) {
+                return;
+            } else {
+                self.show = !self.show;
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+            }
+        });
     },
 };
 </script>
