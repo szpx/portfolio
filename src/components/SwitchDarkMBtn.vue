@@ -3,7 +3,6 @@ import { useToggle, useDark } from '@vueuse/core';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-
 </script>
 <template>
     <div class="bg-gray-500">
